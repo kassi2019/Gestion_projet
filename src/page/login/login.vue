@@ -1,6 +1,5 @@
 <template>
   <main>
-   
     <div class="container">
       <section
         class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
@@ -10,41 +9,34 @@
             <div
               class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center"
             >
-              <div class="d-flex justify-content-center py-4">
-                <a
-                  href="index.html"
-                  class="logo d-flex align-items-center w-auto"
-                >
-                  <img src="../assets/img/logo.png" alt="" />
-                  <span class="d-none d-lg-block">FAPAN</span>
-                </a>
-              </div>
-              <!-- End Logo -->
+              <img
+                src="../../assets/img/logo1.jpg"
+                alt=""
+                style="width: 250px; height: 150px; border-radius: 50%"
+              />
 
               <div
                 class="card mb-3"
                 style="
                   border-radius: 15px 50px 30px;
-                  border-color: red !important;
+                  border-color: #f9d531 !important;
                   border-style: solid;
-                  box-shadow: 10px 5px 5px #b9121b;
+                  box-shadow: 10px 5px 5px #f9d531;
                 "
               >
                 <div class="card-body">
                   <div class="pt-4 pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">
-                      Login to Your Account
+                      Se Connecter au
                     </h5>
                     <p class="text-center small">
-                      Enter your username & password to login
+                      SGOP : Systéme de Gestion des Ordres de Paiements
                     </p>
                   </div>
 
                   <form class="row g-3 needs-validation" novalidate>
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label"
-                        >Email</label
-                      >
+                      <label for="yourUsername" class="form-label">Email</label>
                       <div class="input-group has-validation">
                         <span class="input-group-text" id="inputGroupPrepend"
                           >@</span
@@ -59,18 +51,19 @@
                         />
                         <!-- <div class="invalid-feedback">Please enter your username.</div> -->
                       </div>
-                      <span style="color:#b9121b;font-weight: bolder;"
+                      <span
+                        style="color: #b9121b; font-weight: bolder"
                         color="red"
                         class="hasError"
-                        v-if="verificationEmail(user.email)==0"
+                        v-if="verificationEmail(user.email) == 0"
                         role="alert"
                         >l'email est un introuvable
                       </span>
                       <span
-                      style="color:#1D702D;font-weight: bolder;"
+                        style="color: #1d702d; font-weight: bolder"
                         color="#1D702D"
                         class="hasError"
-                       v-if="verificationEmail(user.email)==1"
+                        v-if="verificationEmail(user.email) == 1"
                         role="alert"
                         >l'email est correct
                       </span>
@@ -101,6 +94,12 @@
                       <button
                         class="btn btn-primary w-100"
                         @click.prevent="connexion()"
+                        style="
+                          border-radius: 15px 50px 30px;
+                          border-color: #f9d531 !important;
+                          border-style: solid;
+                          box-shadow: 5px 2px 2px #ffda8c;
+                        "
                       >
                         Connexion
                       </button>
@@ -208,7 +207,7 @@ export default {
 
     connexion() {
       this.isLoading = true;
-    
+
       if (this.user.email && this.user.password) {
         this.login(this.user).then(
           () => {
@@ -235,3 +234,4 @@ export default {
   },
 };
 </script>
+<style scoped></style>

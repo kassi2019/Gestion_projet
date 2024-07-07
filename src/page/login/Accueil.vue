@@ -3,8 +3,7 @@
     <TheHeader/>
    
     <main id="main" class="main">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<h6 style="text-align: right !important;font-size: 30px;color:#000" class="effet_3d">Bienvenue au Systéme de Gestion des Ordres de Paiement (SGOP)</h6>
 
       <section class="section dashboard"  style=" padding-left: 15%;">
         <div class="row">
@@ -306,3 +305,21 @@ id_service() {
 };
 
 </script>
+<style  scoped>
+.effet_3d {
+  text-align: center;
+  --couleur: 0, 0, 0;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  font-family: Arial;
+  color: white;
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #acacac, 0 3px 0 #a0a0a0, 0 4px 0 #9b9a9a,
+    0 5px 0 #888787, 0 6px 1px rgba(var(--couleur), 0.1),
+    0 0 5px rgba(var(--couleur), 0.1), 0 1px 3px rgba(var(--couleur), 0.3),
+    0 3px 5px rgba(var(--couleur), 0.3), 0 5px 10px rgba(var(--couleur), 0.25),
+    0 10px 10px rgba(var(--couleur), 0.2),
+    0 20px 20px rgba(var(--couleur), 0.15);
+  font-size: 100%;
+}
+</style>

@@ -16,14 +16,15 @@
         <td colspan="4"></td>
 
         <td style="width: 5%">
-          <button
-            type="button"
-            class="btn btn-primary rounded-pill"
+        
+           <span
+                class="badge rounded-pill bg-primary"
             data-bs-toggle="modal"
             data-bs-target="#largeModal"
-          >
-            Ajouter
-          </button>
+                  style="cursor: pointer"
+                 
+                  >Ajouter</span
+                >
         </td>
       </tr>
     </table>
@@ -51,7 +52,21 @@
               <td style="">{{ item.libelle_role }}</td>
               <td style="">{{ item.libelle_service }}</td>
               <td>
-                <button
+                 <span
+                  class="badge rounded-pill bg-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#largeModal1"
+                  style="cursor: pointer"
+                  @click.prevent="AfficheModalModification(item.id)"
+                  >Modifier</span
+                >
+                <span
+                  class="badge bg-danger"
+                  style="cursor: pointer"
+                  
+                  >Supprimer</span
+                >
+                <!-- <button
                   type="button"
                   class="btn btn-primary rounded-pill"
                   data-bs-toggle="modal"
@@ -59,14 +74,15 @@
                   @click.prevent="AfficheModalModification(item.id)"
                 >
                   Modifier
-                </button>
-                <button
+                </button> -->
+                
+                <!-- <button
                   type="button"
                   class="btn btn-danger rounded-pill"
                   @click.prevent="supprimerRoleUtilisateur(item.id)"
                 >
                   Supprimer
-                </button>
+                </button> -->
               </td>
             </tr>
           </tbody>

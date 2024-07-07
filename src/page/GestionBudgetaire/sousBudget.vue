@@ -1,6 +1,6 @@
 <template>
   <main id="main" class="main">
-    
+
     <div class="pagetitle">
       <h3 style="font-size: 16px">Liste Sous budget</h3>
       <!-- <nav>
@@ -36,56 +36,27 @@
     </table>
     <br />
     <section class="section dashboard">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Sous budget</h5>
-
-            <!-- Default Accordion -->
-            <div class="accordion" id="accordionExample" >
-              <div class="accordion-item"  v-for="item in GroupeParActivie"
-                  :key="item">
-                <h2
-                  class="accordion-header"
-                  id="headingOne"
-                 
-                >
-                  <button
-                    class="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
-                    aria-expanded="true"
-                    aria-controls="collapseOne"
-                  >
-                    {{ libelleActivite(item) }}
-                  </button>
-                </h2>
-                <div
-                  id="collapseOne"
-                  class="accordion-collapse collapse show"
-                  aria-labelledby="headingOne"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div class="accordion-body">
-                    <table class="table table-bordered border-primary">
+     <table class="table table-bordered border-primary">
                       <thead>
                         <tr>
                           <!-- <th scope="col">#</th> -->
                           <!-- <th scope="col">N</th> -->
-
+ <th scope="col" style="text-align: center" >
+                            Activité
+                          </th>
                           <th scope="col" style="text-align: center" >
-                            Libelle
+                            Sous budget
                           </th>
                           <th scope="col" style="text-align: center">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         <tr
-                          v-for="item1 in libelleSousBudget(item)"
+                          v-for="item1 in getterSousBudget"
                           :key="item1.id"
                         >
-                          <td style="width: 80%">{{ item1.libelle }}</td>
+                        <td style="width: 45%">{{ libelleActivite(item1.activite_id) }}</td>
+                          <td style="width: 40%">{{ item1.libelle }}</td>
                           <td>
                             <span
                   class="badge rounded-pill bg-primary"
@@ -106,14 +77,6 @@
                         </tr>
                       </tbody>
                     </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Default Accordion Example -->
-          </div>
-        </div>
-      </div>
     </section>
     <div class="modal fade" id="largeModal" tabindex="-1">
       <div class="modal-dialog modal-lg">
@@ -270,11 +233,12 @@ export default {
   },
   created() {
     this.getActivite();
+    this.getGroupeActivite()
     this.getSousBudget();
   },
   computed: {
-    ...mapGetters("budgetaire", ["getterSousBudget"]),
-    ...mapGetters("parametrage", ["getterActivite"]),
+   
+    ...mapGetters("parametrage", ["getterActivite","getterSousBudget",'getterGrpeActivite']),
     libelleSousBudget() {
       return (id) => {
         if (id != null && id != "") {
@@ -287,12 +251,12 @@ export default {
     libelleActivite() {
       return (id) => {
         if (id != null && id != "") {
-          const qtereel = this.getterSousBudget.find(
-            (qtreel) => qtreel.activite_id == id
+          const qtereel = this.getterActivite.find(
+            (qtreel) => qtreel.id == id
           );
 
           if (qtereel) {
-            return qtereel.libelle_activite;
+            return qtereel.code.concat(" - ", qtereel.libelle);
           }
           return 0;
         }
@@ -320,13 +284,15 @@ export default {
     },
   },
   methods: {
-    ...mapActions("budgetaire", [
+   
+      ...mapActions("parametrage", [
       "getActivite",
+      "getSection", "getActivite",'getGroupeActivite',
       "getSousBudget",
       "ajouterSousBudget",
       "modifierSousBudget",
       "supprimerSousBudget",
-      "getSection",
+      
     ]),
     AfficheModalModification(id) {
       this.modNatureDepense = this.getterSousBudget.find((items) => items.id == id);

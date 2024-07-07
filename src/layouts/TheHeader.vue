@@ -23,7 +23,14 @@
         <button type="submit" title="Search"><i class="bi bi-search"></i></button>
       </form>
     </div> -->
-
+<span
+                  class="badge rounded-pill bg-info"
+                 
+                  style="cursor: pointer"
+                  @click.prevent="ParametreGeneraux()"
+                  >Accueil</span
+                >
+                
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
@@ -313,7 +320,7 @@ export default {
     },
  
     ParametreGeneraux() {
-      this.$router.push({ name: "PageAccueil" });
+      this.$router.push({ name: "Accueil" });
     },
     CallProfile(route_nam1){
       this.$router.push({

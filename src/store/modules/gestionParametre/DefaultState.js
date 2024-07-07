@@ -7,7 +7,18 @@ const defaultstate = {
     stateBailleur: [],
     stateActivite: [],
     stateNatureEconomique: [],
-    stateProjet:[]
+    stateProjet: [],
+     stateSousBudget: [],
+    stateGrpeActivite:[],
+    stateDotationNotifie: [],
+    stateDotationReport: [],
+    stateDotationRessourcePropre: [],
+    stateDotationAutreRessource: [],
+   stateGrpeActiviteBudgetNotifie:[],
+    stateGrpeActiviteBudgetReport: [],
+    stateGrpeActiviteBudgetRessourcePropre: [],
+    stateGrpeActiviteBudgetAutreRessource: [],
+    stateInformationBudget:[]
     
 };
 

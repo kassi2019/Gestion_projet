@@ -10,30 +10,42 @@ import NatureEconomique from "../page/ParametreGeneraux/NatureEconomique.vue"
 import projet from "../page/ParametreGeneraux/projet.vue"
 import sousBudget from "../page/GestionBudgetaire/sousBudget.vue"
 import BudgetNotifie from "../page/GestionBudgetaire/BudgetNotifie.vue"
-// import BudgetReport from "../page/GestionBudgetaire/BudgetReport.vue"
-// import BudgetAutreRessource from "../page/GestionBudgetaire/BudgetAutreRessource.vue"
-// import BudgetRessourcePropre from "../page/GestionBudgetaire/BudgetRessourcePropre.vue"
+ import BudgetReport from "../page/GestionBudgetaire/BudgetReport.vue"
+import BudgetAutreRessource from "../page/GestionBudgetaire/BudgetAutreRessource.vue"
+import BudgetRessourcePropre from "../page/GestionBudgetaire/BudgetRessourcePropre.vue"
+import Budget from "../page/GestionBudgetaire/InformationBudget.vue"
+import VentilationBudget from "../page/GestionBudgetaire/VentilationBudget.vue"
 const gestionutilisateur = [
+     {
+        path: '/VentilationBudget/:id',
+        name:"VentilationBudget",
+       component: VentilationBudget
+     },
+      {
+        path: '/Budget',
+        name:"Budget",
+       component: Budget
+     },
       {
         path: '/BudgetNotifie',
         name:"BudgetNotifie",
        component: BudgetNotifie
      },
-//   {
-//         path: '/BudgetReport',
-//         name:"BudgetReport",
-//        component: BudgetReport
-//      },
-//   {
-//         path: '/BudgetAutreRessource',
-//         name:"BudgetAutreRessource",
-//        component: BudgetAutreRessource
-//      },
-//   {
-//         path: '/BudgetRessourcePropre',
-//         name:"BudgetRessourcePropre",
-//        component: BudgetRessourcePropre
-//   },
+  {
+        path: '/BudgetReport',
+        name:"BudgetReport",
+       component: BudgetReport
+     },
+  {
+        path: '/BudgetAutreRessource',
+        name:"BudgetAutreRessource",
+       component: BudgetAutreRessource
+     },
+  {
+        path: '/BudgetRessourcePropre',
+        name:"BudgetRessourcePropre",
+       component: BudgetRessourcePropre
+  },
       {
         path: '/sousBudget',
         name:"sousBudget",

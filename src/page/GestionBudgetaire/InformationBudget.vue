@@ -2,7 +2,7 @@
   <main id="main" class="main">
    
     <div class="pagetitle">
-      <h3 style="font-size: 16px">Liste Budget Report</h3>
+      <h3 style="font-size: 16px">BUDGET</h3>
       <!-- <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -36,49 +36,62 @@
     </table>
     <br />
     <section class="section dashboard">
-      <table class="table table-bordered border-primary">
-        <thead>
-          <tr>
-            <!-- <th scope="col">#</th> -->
-            <!-- <th scope="col">N</th> -->
-            <th scope="col" style="text-align: center">Exercice</th>
-            <th scope="col" style="text-align: center">Activité</th>
-            <th scope="col" style="text-align: center">Dotation (FCFA)</th>
-            <th scope="col" style="text-align: center">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="item1 in getterDotationReport" :key="item1.id">
-            <td style="width: 10%">{{ item1.exercice }}</td>
-            <td style="width: 60%">{{ item1.libelle_activite }}</td>
-            <td style="width: 15%; text-align: right">
-              {{ formatageSommeSansFCFA(parseFloat(item1.dotation)) }}
-            </td>
-            <td>
-              <span
-                class="badge rounded-pill bg-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#largeModal1"
-                style="cursor: pointer"
-                @click.prevent="AfficheModalModification(item1.id)"
-                >Modifier</span
-              >
-              <span
-                class="badge bg-danger"
-                style="cursor: pointer"
-                @click.prevent="supprimerDotationReport(item1.id)"
-                >Supprimer</span
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="row">
+        <table class="table table-bordered border-primary">
+          <thead>
+            <tr>
+              <!-- <th scope="col">#</th> -->
+              <th scope="col">Exercice</th>
+
+              <th scope="col" style="width: 40%">Libelle</th>
+              <th scope="col" style="width: ">Dotation</th>
+              <th scope="col" style="width: ">Décision</th>
+              <th scope="col" style="width: ">Date de visa</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item1 in getterInformationBudget" :key="item1.id">
+              <td style="width: ">{{ item1.exercice }}</td>
+              <td style="width: ">{{ item1.libelle }}</td>
+              <td style=" text-align: right">
+                {{ formatageSommeSansFCFA(parseFloat(item1.dotation)) }}
+              </td>
+              <td style="width: ">{{ afficheDecision(item1.decision) }}</td>
+              <td style="width: ">{{ formaterDate(item1.date_decision) }}</td>
+              <td>
+                <span
+                  class="badge rounded-pill bg-dark"
+                 
+                  style="cursor: pointer"
+                  @click.prevent="AfficheVentilationBudget(item1.id)"
+                  >Saisi budget</span
+                >
+                <span
+                  class="badge rounded-pill bg-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#largeModal1"
+                  style="cursor: pointer"
+                  @click.prevent="AfficheModalModification(item1.id)"
+                  >Modifier</span
+                >
+                <span
+                  class="badge bg-danger"
+                  style="cursor: pointer"
+                  @click.prevent="supprimerInformationBudget(item1.id)"
+                  >Supprimer</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </section>
     <div class="modal fade" id="largeModal" tabindex="-1">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Ajouter Budget Réport</h5>
+            <h5 class="modal-title">Ajouter Budget</h5>
             <button
               type="button"
               class="btn-close"
@@ -100,30 +113,19 @@
                 />
               </div>
               <div class="col-12">
-                <label for="inputNanme4" class="form-label"
-                  >Activité{{ ajouterReport.activite_id }}</label
-                >
-                <select
-                  class="form-select"
+                <label for="inputNanme4" class="form-label">Libelle</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputNanme4"
                   style="border: 1px solid #000"
-                  v-model="ajouterReport.activite_id"
-                >
-                  <option></option>
-                  <option
-                    v-for="data in getterActivite"
-                    :key="data.id"
-                    :value="data.id"
-                  >
-                    {{ data.code }}--{{ data.libelle }}
-                  </option>
-                </select>
+                  v-model="ajouterNatureDepense.libelle"
+                />
               </div>
               <div class="col-12">
-                <label for="inputNanme4" class="form-label"
-                  >Dotation{{ ajouterReport.dotation }}</label
-                >
+                <label for="inputNanme4" class="form-label">Dotation</label>
                 <money3
-                  v-model="ajouterReport.dotation"
+                  v-model="ajouterNatureDepense.dotation"
                   class="form-control"
                   id="inputNanme4"
                   style="border: 1px solid #000"
@@ -136,7 +138,6 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
-             
             >
               Fermer
             </button>
@@ -158,7 +159,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modifier Buddget notifié</h5>
+            <h5 class="modal-title">Modifier Activité</h5>
             <button
               type="button"
               class="btn-close"
@@ -180,32 +181,50 @@
                 />
               </div>
               <div class="col-12">
-                <label for="inputNanme4" class="form-label">Activité</label>
-                <select
-                  class="form-select"
-                  style="border: 1px solid #000"
-                  v-model="modNatureDepense.activite_id"
-                >
-                  <option selected></option>
-                  <option
-                    v-for="item in getterActivite"
-                    :key="item.id"
-                    :value="item.id"
-                  >
-                    {{ item.code }}--{{ item.libelle }}
-                  </option>
-                </select>
-              </div>
-              <div class="col-12">
-                <label for="inputNanme4" class="form-label">Dotation</label>
-
-                <money3
-                  v-bind="config"
-                  v-model="modNatureDepense.dotation"
+                <label for="inputNanme4" class="form-label">Libelle{{ modNatureDepense.libelle }}</label>
+                <input
+                  type="text"
                   class="form-control"
                   id="inputNanme4"
                   style="border: 1px solid #000"
+                  v-model="modNatureDepense.libelle"
+                />
+              </div>
+              <div class="col-12">
+                <label for="inputNanme4" class="form-label">Dotation</label>
+                <money3
+                  v-model="modNatureDepense.dotation"
+                  class="form-control"
+                  id="inputNanme4"
+                  style=""
                 ></money3>
+              </div>
+              <div class="col-12">
+                <label for="inputNanme4" class="form-label">Décision</label>
+                <select
+                  class="form-select"
+                  style="border: 1px solid #000"
+                  v-model="modNatureDepense.decision"
+                >
+                  <option selected></option>
+                  <option :value="1">Visé</option>
+                  <option :value="2">Visé avec observation</option>
+                  <option :value="3">Différé</option>
+                  <option :value="4">Réjetté</option>
+                  <option :value="0">En attente</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="inputNanme4" class="form-label"
+                  >Date décision</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="inputNanme4"
+                  style="border: 1px solid #000"
+                  v-model="modNatureDepense.date_decision"
+                />
               </div>
             </form>
           </div>
@@ -214,7 +233,7 @@
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
-              @click.prevent="this.getDotationReport()"
+              @click.prevent="this.getActivite()"
             >
               Fermer
             </button>
@@ -245,55 +264,28 @@ export default {
   components: {},
   data() {
     return {
-      ajouterReport: {
-        activite_id: 0,
+      ajouterNatureDepense: {
         dotation: "",
+        libelle: "",
       },
       modNatureDepense: {
-        activite_id: "",
         dotation: "",
+          libelle: "",
+          decision: "",
+          date_decision:""
       },
-
-        config: {
-          prefix: "",
-          suffix: "",
-          thousands: ",",
-          decimal: ".",
-          precision: 0,
-          disableNegative: false,
-          disabled: false,
-          min: null,
-          max: null,
-          allowBlank: false,
-          minimumNumberOfCharacters: 0,
-          shouldRound: true,
-          focusOnRight: false,
-        },
     };
   },
   created() {
-    this.getActivite();
     this.getExerciceBudgetaire();
-    // this.getGroupeActivitebudgetReport();
-    this.getDotationReport();
+    this.getInformationBudget();
   },
   computed: {
     ...mapGetters("parametrage", [
       "getterActivite",
-      "getterExerciceBudgetaire", "getterDotationReport",
-      "getterGrpeActiviteBudgetReport",
+      "getterExerciceBudgetaire",
+      "getterInformationBudget",
     ]),
-    
- 
-    listeBudgetNotifie() {
-      return (id) => {
-        if (id != null && id != "") {
-          return this.getterDotationReport.filter(
-            (qtreel) => qtreel.activite_id == id
-          );
-        }
-      };
-    },
     exerciceBudgetaire() {
       //   return (id) => {
       //     if (id != null && id != "") {
@@ -302,7 +294,7 @@ export default {
       );
 
       if (qtereel) {
-        return qtereel.annee - 1;
+        return qtereel.annee;
       }
       return 0;
       //     }
@@ -310,50 +302,63 @@ export default {
     },
   },
   methods: {
-    ...mapActions("parametrage", ["getActivite", "getExerciceBudgetaire","getDotationReport",
-      "ajouterDotationReport",
-      "modifierDotationReport",
-      "supprimerDotationReport",
-      "getGroupeActivitebudgetReport",]),
-   
-    actualisation() {
-      // this.getGroupeActivitebudgetReport();
-      this.getDotationReport();
+    ...mapActions("parametrage", [
+      "getActivite",
+      "ajouterInformationBudget",
+      "modifierInformationBudget",
+      "supprimerInformationBudget",
+      "getExerciceBudgetaire",
+      "getInformationBudget",
+    ]),
+     AfficheVentilationBudget(id) {
+      this.$router.push({
+        name: "VentilationBudget",
+        params: { id: id },
+      });
+    },
+      afficheDecision($id) {
+          if ($id == 1) {
+            return 'Visé'
+          } else if ($id == 2) {
+            return 'Visé avec observation'
+          } else if ($id == 3) {
+            return 'Différé'
+          } else if ($id == 4) {
+            return 'Réjetté'
+          } else {
+            return 'En attente'
+        }
     },
     AfficheModalModification(id) {
-      this.modNatureDepense = this.getterDotationReport.find(
+      this.modNatureDepense = this.getterInformationBudget.find(
         (items) => items.id == id
       );
     },
     EnregistrerSection() {
       var objetDirect1 = {
-        activite_id: this.ajouterReport.activite_id,
-        dotation: this.ajouterReport.dotation,
         exercice: this.exerciceBudgetaire,
+        dotation: this.ajouterNatureDepense.dotation,
+        libelle: this.ajouterNatureDepense.libelle,
       };
 
-      this.ajouterDotationReport(objetDirect1);
-
-      this.ajouterReport = {
-        activite_id: "",
-        dotation: "",
-      };
+      this.ajouterInformationBudget(objetDirect1);
+      this.ajouterNatureDepense = {};
     },
 
     modificationSection() {
       var objetDirect1 = {
         id: this.modNatureDepense.id,
-
-        activite_id: this.modNatureDepense.activite_id,
-        dotation: this.modNatureDepense.dotation,
         exercice: this.exerciceBudgetaire,
+        dotation: this.modNatureDepense.dotation,
+          libelle: this.modNatureDepense.libelle,
+          date_decision: this.modNatureDepense.date_decision,
+        decision: this.modNatureDepense.decision,
       };
 
-      this.modifierDotationReport(objetDirect1);
+      this.modifierInformationBudget(objetDirect1);
       this.modNatureDepense = {};
     },
-    formatageSomme: formatageSomme,
-    formatageSommeSansFCFA: formatageSommeSansFCFA,
+formatageSommeSansFCFA: formatageSommeSansFCFA,
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },

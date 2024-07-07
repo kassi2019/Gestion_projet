@@ -50,7 +50,8 @@ const AuthRoutes = [
      component: PageAccueil,
       
 
-   }
+  }
+    
 ]
 
 export default AuthRoutes;

@@ -15,14 +15,22 @@
         <td colspan="4"></td>
 
         <td style="width: 5%">
-          <button
+          <!-- <button
             type="button"
             class="btn btn-primary rounded-pill"
             data-bs-toggle="modal"
             data-bs-target="#largeModal"
           >
             Ajouter
-          </button>
+          </button> -->
+           <span
+                class="badge rounded-pill bg-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#largeModal"
+                  style="cursor: pointer"
+                 
+                  >Ajouter</span
+                >
         </td>
       </tr>
     </table>
@@ -91,18 +99,21 @@
               <td v-else></td>
 
               <td>
-                <button
-                  type="button"
-                  class="btn btn-primary rounded-pill"
+                <span
+                  class="badge rounded-pill bg-primary"
                   data-bs-toggle="modal"
                   data-bs-target="#largeModal1"
+                  style="cursor: pointer"
                   @click.prevent="AfficheModalModification(item.id)"
+                  >Modifier</span
                 >
-                  Modifier
-                </button>
-                <button type="button" class="btn btn-danger rounded-pill">
-                  Supprimer
-                </button>
+                <!-- <span
+                  class="badge bg-danger"
+                  style="cursor: pointer"
+                  @click.prevent="supprimerActivite(item.id)"
+                  >Supprimer</span
+                > -->
+                
               </td>
             </tr>
           </tbody>

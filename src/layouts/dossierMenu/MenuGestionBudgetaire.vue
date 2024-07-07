@@ -46,7 +46,7 @@
           </li>
 
           <li>
-            <a href=""  @click.prevent="activedOptionMenu('sousBudget')">
+            <a href="" @click.prevent="activedOptionMenu('sousBudget')">
               <i class="bi bi-circle"></i><span>Sous budget / Composante</span>
             </a>
           </li>
@@ -69,43 +69,63 @@
           data-bs-parent="#sidebar-nav"
         >
           <li class="nav-item">
-            <a class="nav-link collapsed" href="" @click.prevent="activedOptionMenu('BudgetNotifie')">
+            <a
+              class="nav-link collapsed"
+              href=""
+              @click.prevent="activedOptionMenu('BudgetNotifie')"
+            >
               <i class="bi bi-person"></i>
               <span>Dotation notifié</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link collapsed" href="" @click.prevent="activedOptionMenu('BudgetReport')">
+            <a
+              class="nav-link collapsed"
+              href=""
+              @click.prevent="activedOptionMenu('BudgetReport')"
+            >
               <i class="bi bi-person"></i>
               <span>Dotation réport</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link collapsed" href="" @click.prevent="activedOptionMenu('BudgetRessourcePropre')">
+            <a
+              class="nav-link collapsed"
+              href=""
+              @click.prevent="activedOptionMenu('BudgetRessourcePropre')"
+            >
               <i class="bi bi-person"></i>
               <span> Dotation ressource propre</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link collapsed" href="" @click.prevent="activedOptionMenu('BudgetAutreRessource')">
+            <a
+              class="nav-link collapsed"
+              href=""
+              @click.prevent="activedOptionMenu('BudgetAutreRessource')"
+            >
               <i class="bi bi-person"></i>
               <span>Dotation autre ressource</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a
+              class="nav-link collapsed"
+              href="users-profile.html"
+              @click.prevent="activedOptionMenu('Budget')"
+            >
               <i class="bi bi-person"></i>
               <span>Eclaitement du budget</span>
             </a>
           </li>
         </ul>
       </li>
-<li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
-              <i class="bi bi-person"></i>
-              <span> Modification budget</span>
-            </a>
-          </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="users-profile.html">
+          <i class="bi bi-person"></i>
+          <span> Modification budget</span>
+        </a>
+      </li>
       <li class="nav-item">
         <a
           class="nav-link collapsed"
@@ -160,7 +180,7 @@ export default {
     this.marcheid = this.$route.params.id;
   },
 
-   methods: {
+  methods: {
     ...mapActions("Application", ["getRenvoi"]),
     activedOptionMenu(route_name) {
       this.$router.push({

@@ -1,6 +1,6 @@
 <template>
   <main id="main" class="main">
-    {{ getterDotationNotifie }}
+   
     <div class="pagetitle">
       <h3 style="font-size: 16px">Liste Budget notifié</h3>
       <!-- <nav>
@@ -32,52 +32,64 @@
             >Ajouter</span
           >
         </td>
+        <td style="width: 5%">
+          <!-- <button
+            type="button"
+            class="btn btn-primary rounded-pill"
+            data-bs-toggle="modal"
+            data-bs-target="#largeModal"
+          >
+            Ajouter
+          </button> -->
+          <span
+            class="badge rounded-pill bg-primary"
+            
+            style="cursor: pointer"
+            @click.prevent="this.getDotationNotifie()"
+            >Actualiser</span
+          >
+        </td>
       </tr>
     </table>
     <br />
-    <section class="section dashboard">
-      <div class="row">
-        <table class="table table-bordered border-primary">
-          <thead>
-            <tr>
-              <!-- <th scope="col">#</th> -->
-              <th scope="col">Exercice</th>
-              <th scope="col" style="width: 75%">Activité</th>
-              <th scope="col" style="width: ">Dotation</th>
-
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- <tr
-              v-for="item in getterActivite"
-              :key="item.id"
-              
-            >
-              <td>{{ item.code }}</td>
-              <td>{{ item.libelle }}</td>
-
-              <td>
-                <span
-                  class="badge rounded-pill bg-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#largeModal1"
-                  style="cursor: pointer"
-                  @click.prevent="AfficheModalModification(item.id)"
-                  >Modifier</span
-                >
-                <span
-                  class="badge bg-danger"
-                  style="cursor: pointer"
-                  @click.prevent="supprimerActivite(item.id)"
-                  >Supprimer</span
-                >
-              
-              </td>
-            </tr> -->
-          </tbody>
-        </table>
-      </div>
+<section class="section dashboard">
+     <table class="table table-bordered border-primary">
+        <thead>
+          <tr>
+            <!-- <th scope="col">#</th> -->
+            <!-- <th scope="col">N</th> -->
+            <th scope="col" style="text-align: center">Exercice</th>
+            <th scope="col" style="text-align: center">Activité</th>
+            <th scope="col" style="text-align: center">Dotation (FCFA)</th>
+            <th scope="col" style="text-align: center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item1 in getterDotationNotifie" :key="item1.id">
+            <td style="width: 10%">{{ item1.exercice }}</td>
+            <td style="width: 60%">{{ libelleActivite(item1.activite_id) }}</td>
+            <td style="width: 15%; text-align: right">
+              {{ formatageSommeSansFCFA(parseFloat(item1.dotation)) }}
+            </td>
+            <td>
+              <span
+                class="badge rounded-pill bg-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#largeModal1"
+                style="cursor: pointer"
+                @click.prevent="AfficheModalModification(item1.id)"
+                >Modifier</span
+              >
+              <span
+                class="badge bg-danger"
+                style="cursor: pointer"
+                @click.prevent="supprimerDotationNotifie(item1.id)"
+                >Supprimer</span
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </section>
     <div class="modal fade" id="largeModal" tabindex="-1">
       <div class="modal-dialog modal-lg">
@@ -100,7 +112,7 @@
                   class="form-control"
                   id="inputNanme4"
                   :value="exerciceBudgetaire"
-                  style="border: 1px solid #000"
+                  style="border: 1px solid #000;background-color:#dcdcdc;"
                   readonly
                 />
               </div>
@@ -122,7 +134,7 @@
                 </select>
               </div>
               <div class="col-12">
-                <label for="inputNanme4" class="form-label">Dotation{{ ajouterNatureDepense.dotation }}</label>
+                <label for="inputNanme4" class="form-label">Dotation</label>
                 <money3  v-model="ajouterNatureDepense.dotation"  class="form-control" id="inputNanme4"    style="border: 1px solid #000"></money3> 
              
               </div>
@@ -136,7 +148,7 @@
             >
               Fermer
             </button>
-            <button
+            <button 
               type="button"
               class="btn btn-primary"
               @click.prevent="EnregistrerSection()"
@@ -171,7 +183,7 @@
                   class="form-control"
                   id="inputNanme4"
                   :value="exerciceBudgetaire"
-                  style="border: 1px solid #000"
+                  style="border: 1px solid #000;background-color:#dcdcdc;"
                   readonly
                 />
               </div>
@@ -194,13 +206,9 @@
               </div>
               <div class="col-12">
                 <label for="inputNanme4" class="form-label">Dotation</label>
-                <input
-                  type="number"
-                  class="form-control"
-                  id="inputNanme4"
-                  style="border: 1px solid #000"
-                  v-model="modNatureDepense.dotation"
-                />
+               
+                  <money3 v-bind="config" v-model="modNatureDepense.dotation"  class="form-control" id="inputNanme4"    style="border: 1px solid #000"></money3> 
+             
               </div>
             </form>
           </div>
@@ -232,6 +240,10 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import moment from "moment";
+import {
+  formatageSomme,
+  formatageSommeSansFCFA,
+} from "../Repositories/Repository";
 export default {
   components: {},
   data() {
@@ -265,15 +277,37 @@ export default {
   created() {
     this.getActivite();
     this.getExerciceBudgetaire();
+   // this.getGroupeActivitebudgetNotifie()
     this.getDotationNotifie();
   },
   computed: {
     ...mapGetters("parametrage", [
       "getterActivite",
-      "getterExerciceBudgetaire",
+      "getterExerciceBudgetaire","getterDotationNotifie",'getterGrpeActiviteBudgetNotifie'
     ]),
-      ...mapGetters("budgetaire", ["getterDotationNotifie"]),
+      libelleActivite() {
+      return (id) => {
+        if (id != null && id != "") {
+          const qtereel = this.getterActivite.find(
+            (qtreel) => qtreel.id == id
+          );
 
+          if (qtereel) {
+            return qtereel.code.concat(" - ", qtereel.libelle);
+          }
+          return 0;
+        }
+      };
+    },
+ listeBudgetNotifie() {
+      return (id) => {
+        if (id != null && id != "") {
+          return this.getterDotationNotifie.filter(
+            (qtreel) => qtreel.activite_id == id
+          );
+        }
+      };
+    },
       exerciceBudgetaire() {
     //   return (id) => {
     //     if (id != null && id != "") {
@@ -290,13 +324,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions("parametrage", ["getActivite", "getExerciceBudgetaire"]),
-    ...mapActions("budgetaire", [
-      "getDotationNotifie",
+    ...mapActions("parametrage", ["getActivite", "getExerciceBudgetaire", "getDotationNotifie",
       "ajouterDotationNotifie",
       "modifierDotationNotifie",
-      "supprimerDotationNotifie",
-    ]),
+      "supprimerDotationNotifie",'getGroupeActivitebudgetNotifie']),
+   
     AfficheModalModification(id) {
       this.modNatureDepense = this.getterDotationNotifie.find(
         (items) => items.id == id
@@ -328,7 +360,8 @@ export default {
       this.modifierDotationNotifie(objetDirect1);
       this.modNatureDepense = {};
     },
-
+formatageSomme: formatageSomme,
+    formatageSommeSansFCFA: formatageSommeSansFCFA,
     formaterDate(date) {
       return moment(date, "YYYY-MM-DD").format("DD/MM/YYYY");
     },

@@ -1085,3 +1085,29 @@ export function supprimerInformationBudget({ commit}, id) {
    // });
 }
 
+//BUDGET ECLATE
+
+
+export function ajouterBudgetEclate({ commit }, nouveau) {
+ 
+    apiGuest.post("/EnregistrementBudget", nouveau, { headers: authHeader() })
+    .then(response => {
+      if (response.status == 201) {
+        commit("AJOUTER_BUDGET_ECLATE", response.data);
+       toast("Enregistrement effectué avec succès!", {
+        "theme": "auto",
+        "type": "success",
+        "dangerouslyHTMLString": true
+})
+      }
+    }).catch((error) =>  {
+    //  console.error("Login failed:", error);
+      // this.error_message = "email ou password Incorrect !";
+      toast.error("Un probleme survenu lors de l'enregistrement", {
+        position: "top-right",
+        //icon: "times",
+        autoClose: 5000,
+      });
+      // return false;
+    });
+}

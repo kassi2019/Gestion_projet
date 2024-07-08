@@ -2,7 +2,7 @@
   <main id="main" class="main">
    
     <div class="pagetitle">
-      <h3 style="font-size: 16px">BUDGET</h3>
+      <h3 style="font-size: 16px">Information du budget global</h3>
       <!-- <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -43,8 +43,8 @@
               <!-- <th scope="col">#</th> -->
               <th scope="col">Exercice</th>
 
-              <th scope="col" style="width: 40%">Libelle</th>
-              <th scope="col" style="width: ">Dotation</th>
+              <th scope="col" style="width: 40%">Libelle du budget</th>
+              <th scope="col" style="width: ">Dotation global budget</th>
               <th scope="col" style="width: ">Décision</th>
               <th scope="col" style="width: ">Date de visa</th>
               <th></th>
@@ -91,7 +91,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Ajouter Budget</h5>
+            <h5 class="modal-title">Ajouter budget global</h5>
             <button
               type="button"
               class="btn-close"
@@ -113,7 +113,7 @@
                 />
               </div>
               <div class="col-12">
-                <label for="inputNanme4" class="form-label">Libelle</label>
+                <label for="inputNanme4" class="form-label">Libelle du budget</label>
                 <input
                   type="text"
                   class="form-control"
@@ -123,7 +123,7 @@
                 />
               </div>
               <div class="col-12">
-                <label for="inputNanme4" class="form-label">Dotation</label>
+                <label for="inputNanme4" class="form-label">Dotation global budget</label>
                 <money3
                   v-model="ajouterNatureDepense.dotation"
                   class="form-control"
@@ -159,7 +159,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modifier Activité</h5>
+            <h5 class="modal-title">Modifier budget global</h5>
             <button
               type="button"
               class="btn-close"
@@ -181,7 +181,7 @@
                 />
               </div>
               <div class="col-12">
-                <label for="inputNanme4" class="form-label">Libelle{{ modNatureDepense.libelle }}</label>
+                <label for="inputNanme4" class="form-label">Libelle du budget</label>
                 <input
                   type="text"
                   class="form-control"
@@ -191,7 +191,7 @@
                 />
               </div>
               <div class="col-12">
-                <label for="inputNanme4" class="form-label">Dotation</label>
+                <label for="inputNanme4" class="form-label">Dotation global budget</label>
                 <money3
                   v-model="modNatureDepense.dotation"
                   class="form-control"

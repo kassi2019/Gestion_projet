@@ -75,7 +75,7 @@
               @click.prevent="activedOptionMenu('BudgetNotifie')"
             >
               <i class="bi bi-person"></i>
-              <span>Dotation notifié</span>
+              <span>Budget notifié</span>
             </a>
           </li>
           <li class="nav-item">
@@ -85,7 +85,7 @@
               @click.prevent="activedOptionMenu('BudgetReport')"
             >
               <i class="bi bi-person"></i>
-              <span>Dotation réport</span>
+              <span>Budget réport</span>
             </a>
           </li>
           <li class="nav-item">
@@ -95,7 +95,7 @@
               @click.prevent="activedOptionMenu('BudgetRessourcePropre')"
             >
               <i class="bi bi-person"></i>
-              <span> Dotation ressource propre</span>
+              <span> Budget ressource propre</span>
             </a>
           </li>
           <li class="nav-item">
@@ -105,7 +105,7 @@
               @click.prevent="activedOptionMenu('BudgetAutreRessource')"
             >
               <i class="bi bi-person"></i>
-              <span>Dotation autre ressource</span>
+              <span>Budget autre ressource</span>
             </a>
           </li>
           <li class="nav-item">

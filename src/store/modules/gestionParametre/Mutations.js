@@ -367,3 +367,10 @@ export const MODIFIER_INFORMATION_BUDGET = (state, elementModif) => {
 export const SUPPRIMER_INFORMATION_BUDGET = (state, id) => {
     state.stateInformationBudget = state.stateInformationBudget.filter(titre => titre.id != id)
 };
+
+
+/// budget eclate
+
+export const AJOUTER_BUDGET_ECLATE = (state, elementAjouter) => {
+    state.stateBudgetEclate.unshift(elementAjouter)
+}

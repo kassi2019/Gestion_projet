@@ -3,7 +3,7 @@
     <TheHeader/>
    
     <main id="main" class="main">
-<h6 style="text-align: right !important;font-size: 30px;color:#000" class="effet_3d">Bienvenue au Systéme de Gestion des Ordres de Paiement (SGOP)</h6>
+<!-- <h6 style="text-align: right !important;font-size: 30px;color:#000" class="effet_3d">Bienvenue au Systéme de Gestion des Ordres de Paiement (SGOP)</h6> -->
 
       <section class="section dashboard"  style=" padding-left: 15%;">
         <div class="row">

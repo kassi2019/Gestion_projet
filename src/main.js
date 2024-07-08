@@ -10,7 +10,7 @@ import store from './store/index'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import money from 'v-money3'
-
+import 'vue-search-select/dist/VueSearchSelect.css';
 
 
 const app = createApp(App)

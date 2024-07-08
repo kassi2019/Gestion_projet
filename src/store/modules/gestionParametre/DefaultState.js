@@ -18,7 +18,8 @@ const defaultstate = {
     stateGrpeActiviteBudgetReport: [],
     stateGrpeActiviteBudgetRessourcePropre: [],
     stateGrpeActiviteBudgetAutreRessource: [],
-    stateInformationBudget:[]
+    stateInformationBudget: [],
+    stateBudgetEclate:[]
     
 };
 
